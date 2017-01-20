@@ -1,6 +1,5 @@
-__version__ = '0.0.7'
+__version__ = '0.0.8'
 
 from sqlalchemy.dialects import registry
 
-registry.register("bigquery", "sqlalchemy_bigquery.pyodbc", "BigQueryDialect_pyodbc")
-registry.register("bigquery.pyodbc", "sqlalchemy_bigquery.pyodbc", "BigQueryDialect_pyodbc")
+registry.register("bigquery", "sqlalchemy_bigquery.base", "BigQueryDialect")

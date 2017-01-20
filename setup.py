@@ -1,7 +1,7 @@
 import os
 import re
 
-from setuptools import setup
+from setuptools import setup, find_packages
 
 v = open(os.path.join(os.path.dirname(__file__), 'sqlalchemy_bigquery', '__init__.py'))  # NOQA
 VERSION = re.compile(r".*__version__ = '(.*?)'", re.S).match(v.read()).group(1)
@@ -28,15 +28,21 @@ setup(
     author='Conrad Dean',
     author_email='conrad.p.dean@gmail.com',
     license='MIT',
-    packages=['sqlalchemy_bigquery'],
+    packages=find_packages(),
     include_package_data=True,
-    install_requires=['SQLAlchemy==1.0.9'],
     tests_require=['py.test'],
     zip_safe=False,
     entry_points={
-        'sqlalchemy.dialects': [
-            'bigquery = sqlalchemy_bigquery.pyodbc:BigQueryDialect_pyodbc',
-            'bigquery.pyodbc = sqlalchemy_bigquery.pyodbc:BigQueryDialect_pyodbc',  # NOQA
-        ]
+        'sqlalchemy.dialects': ['bigquery = sqlalchemy_bigquery.base:BigQueryDialect']
     }
+
 )
+# packages=['sqlalchemy_bigquery','sqlalchemy_bigquery.gcp','sqlalchemy_bigquery.gcp.bq_dbapi', 'sqlalchemy_bigquery.gcp.authorize'],
+
+
+'''
+    entry_points={
+        "sqlalchemy.dialects":
+            ["rqlite.pyrqlite = sqlalchemy_rqlite.pyrqlite:dialect"]
+    },
+'''
