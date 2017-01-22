@@ -109,7 +109,8 @@ class BigQueryDialect(default.DefaultDialect):
     def get_table_names(self, connection, schema=None, **kw):
         """Return a list of table names for `schema`."""
         print "BigQueryDialect::get_table_names conn: {} schema: {}".format(connection, schema)
-        return connection.get_table_names(schema, **kw)
+        #return connection.get_table_names(schema, **kw)
+        return ["babynames.names2010"]
 
 
     def get_columns(self, connection, table_name, schema=None, **kw):

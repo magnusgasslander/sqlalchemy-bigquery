@@ -65,9 +65,6 @@ class GoogleCloudBaseHook(object):
         """
 
         kwargs = {}
-        #if self.delegate_to:
-        #    kwargs['sub'] = self.delegate_to
-
 
         if not key_path:
             logging.info('Getting connection using `gcloud auth` user, since no key file '
@@ -90,23 +87,5 @@ class GoogleCloudBaseHook(object):
                 raise Exception('Unrecognised extension for key file.')
 
         http = httplib2.Http()
-        print "Will authorize"
         return credentials.authorize(http)
-
-    def _get_field(self, f, default=None):
-        """
-        Fetches a field from extras, and returns it. This is some Airflow
-        magic. The google_cloud_platform hook type adds custom UI elements
-        to the hook page, which allow admins to specify service_account,
-        key_path, etc. They get formatted as shown below.
-        """
-        long_f = 'extra__google_cloud_platform__{}'.format(f)
-        if long_f in self.extras:
-            return self.extras[long_f]
-        else:
-            return default
-
-    @property
-    def project_id(self):
-        return self._get_field('project')
 
